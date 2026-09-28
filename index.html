@@ -1,49 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Question importante ❤️</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    height:100vh;
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    width:400px;
+    box-shadow:0 0 20px rgba(0,0,0,.2);
+}
+
+button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:20px;
+    transition:all .3s ease;
+}
+
+#yes{
+    background:#4CAF50;
+    color:white;
+}
+
+#no{
+    background:#f44336;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2 id="question">Est-ce que tu m'aimes ? ❤️</h2>
+
+    <button id="yes">Oui ❤️</button>
+    <button id="no">Non 😏</button>
+</div>
+
 <script>
+
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const question = document.getElementById("question");
+
 const questions = [
     "Est-ce que tu m'aimes ? ❤️",
     "Suis-je ton chéri préféré ? 🥰",
     "Est-ce que je suis beau ? 😎",
     "Veux-tu sortir avec moi ce week-end ? 🌹",
-    "Veux-tu qu'on fasse plein de voyages ensemble ? ✈️",
-    "Est-ce que je mérite un gros bisou ? 😘"
+    "Est-ce qu'on forme le meilleur couple ? ❤️",
+    "Est-ce que je mérite un gros bisous ? 😘"
 ];
 
-let current = 0;
+let questionIndex = 0;
+let yesScale = 1;
+let noScale = 1;
 
-function nextQuestion(){
-    current++;
+yesBtn.addEventListener("click", () => {
 
-    if(current >= questions.length){
-        document.querySelector('.card').innerHTML = `
-            <h1>❤️ MOI AUSSI JE T'AIME ❤️</h1>
-            <h2>P'TIT MOUKIX 😘</h2>
-        `;
+    questionIndex++;
+
+    yesScale = 1;
+    noScale = 1;
+
+    yesBtn.style.transform = "scale(1)";
+    noBtn.style.transform = "scale(1)";
+    noBtn.style.left = "0px";
+    noBtn.style.top = "0px";
+
+    if(questionIndex >= questions.length){
+        document.querySelector(".card").innerHTML =
+            "<h1>❤️ Je le savais ! ❤️</h1><h2>Je t'aime énormément 😘</h2>";
         return;
     }
 
-    document.getElementById("question").innerText = questions[current];
-}
-
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
-
-let scale = 1;
-let yesScale = 1;
+    question.textContent = questions[questionIndex];
+});
 
 noBtn.addEventListener("mouseover", () => {
 
-    const x = Math.random() * 250 - 125;
-    const y = Math.random() * 150 - 75;
+    const x = Math.random() * 300 - 150;
+    const y = Math.random() * 200 - 100;
 
-    scale -= 0.08;
-    if(scale < 0.1) scale = 0.1;
+    noBtn.style.position = "relative";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 
-    yesScale += 0.08;
-
-    noBtn.style.transform =
-        `translate(${x}px, ${y}px) scale(${scale})`;
-
-    yesBtn.style.transform =
-        `scale(${yesScale})`;
-});
-</script>
+  

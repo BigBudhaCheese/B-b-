@@ -1,19 +1,58 @@
+<script>
+
+const questions = [
+    "Est-ce que tu m'aimes ? ❤️",
+    "Suis-je ton chéri préféré ? 🥰",
+    "Est-ce que je suis beau ? 😎",
+    "Veux-tu sortir avec moi ce week-end ? 🌹",
+    "Veux-tu qu'on fasse plein de voyages ensemble ? ✈️",
+    "Est-ce que je mérite un gros bisou ? 😘"
+];
+
+let current = 0;
+
+let yesSize = 1;
+let noSize = 1;
+
+function nextQuestion() {
+    current++;
+
+    yesSize = 1;
+    noSize = 1;
+
+    document.getElementById("yes").style.transform = "scale(1)";
+    document.getElementById("no").style.transform = "scale(1)";
+
+    if (current >= questions.length) {
+        document.querySelector('.card').innerHTML = `
+            <h1>❤️ Félicitations ❤️</h1>
+            <p>Toutes les réponses étaient OUI 😘</p>
+        `;
+        return;
+    }
+
+    document.getElementById("question").innerText = questions[current];
+}
+
+const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
-let yesScale = 1;
 
 noBtn.addEventListener("mouseover", () => {
 
-    const x = Math.random() * 250 - 125;
-    const y = Math.random() * 150 - 75;
+    const x = Math.random() * 300 - 150;
+    const y = Math.random() * 200 - 100;
 
-    scale -= 0.08;
-    if(scale < 0.1) scale = 0.1;
+    noBtn.style.position = "relative";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 
-    yesScale += 0.08;
+    yesSize += 0.25;
+    noSize -= 0.08;
 
-    noBtn.style.transform =
-        `translate(${x}px, ${y}px) scale(${scale})`;
+    if (noSize < 0.2) noSize = 0.2;
 
-    yesBtn.style.transform =
-        `scale(${yesScale})`;
+    yesBtn.style.transform = `scale(${yesSize})`;
+    noBtn.style.transform = `scale(${noSize})`;
 });
+
+</script>

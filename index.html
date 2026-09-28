@@ -23,6 +23,7 @@ body{
     border-radius:20px;
     width:400px;
     box-shadow:0 0 20px rgba(0,0,0,.2);
+    position:relative;
 }
 
 button{
@@ -43,6 +44,7 @@ button{
 #no{
     background:#f44336;
     color:white;
+    position:relative;
 }
 </style>
 </head>
@@ -79,17 +81,14 @@ yesBtn.addEventListener("click", () => {
 
     questionIndex++;
 
-    yesScale = 1;
-    noScale = 1;
-
-    yesBtn.style.transform = "scale(1)";
-    noBtn.style.transform = "scale(1)";
-    noBtn.style.left = "0px";
-    noBtn.style.top = "0px";
-
     if(questionIndex >= questions.length){
-        document.querySelector(".card").innerHTML =
-            "<h1>❤️ Je le savais ! ❤️</h1><h2>Je t'aime énormément 😘</h2>";
+
+        document.querySelector(".card").innerHTML = `
+            <h1>❤️ MOI AUSSI JE T'AIME ❤️</h1>
+            <h2>P'TIT MOUKIX 😘</h2>
+            <p>Tu savais déjà la bonne réponse 😉</p>
+        `;
+
         return;
     }
 
@@ -101,8 +100,21 @@ noBtn.addEventListener("mouseover", () => {
     const x = Math.random() * 300 - 150;
     const y = Math.random() * 200 - 100;
 
-    noBtn.style.position = "relative";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 
-  
+    noScale -= 0.08;
+    if(noScale < 0.05){
+        noScale = 0.05;
+    }
+
+    yesScale += 0.08;
+
+    noBtn.style.transform = `scale(${noScale})`;
+    yesBtn.style.transform = `scale(${yesScale})`;
+});
+
+</script>
+
+</body>
+</html>
